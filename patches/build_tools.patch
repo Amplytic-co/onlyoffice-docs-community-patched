@@ -1,0 +1,25 @@
+diff --git a/scripts/build_server.py b/scripts/build_server.py
+index 477469e..869c33e 100644
+--- a/scripts/build_server.py
++++ b/scripts/build_server.py
+@@ -61,7 +61,7 @@ def make():
+       base.copy_file(custom_public_key, server_dir + '/Common/sources')
+ 
+   #node22 packaging has issue https://github.com/yao-pkg/pkg/issues/87
+-  pkg_target = "node20"
++  pkg_target = "node24"
+ 
+   if ("linux" == base.host_platform()):
+     pkg_target += "-linux"
+diff --git a/scripts/core_common/modules/v8_89.py b/scripts/core_common/modules/v8_89.py
+index 26b9505..e6d608e 100644
+--- a/scripts/core_common/modules/v8_89.py
++++ b/scripts/core_common/modules/v8_89.py
+@@ -218,6 +218,7 @@ def make():
+     
+   if not base.is_dir("depot_tools"):
+     base.cmd("git", ["clone", "https://chromium.googlesource.com/chromium/tools/depot_tools.git"])
++    base.cmd_in_dir("depot_tools", "git", ["checkout", "-q", "a03dfbf7f2d1cefa2795d81d59ca4f16c8616a8f"])
+     change_bootstrap()
+ 
+   os.environ["PATH"] = base_dir + "/depot_tools" + os.pathsep + os.environ["PATH"]
